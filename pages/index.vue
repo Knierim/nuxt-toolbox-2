@@ -3,7 +3,7 @@
     <div class="intro">
       <h1>Nuxt Toolbox</h1>
       <p>
-        Hi 👋! This template gives you a
+        Hi 👋!! This template gives you a
         <a href="https://nuxtjs.org/">Nuxt</a> app with the scaffolding for
         <a href="https://www.netlify.com/products/functions/"
           >Netlify Functions</a

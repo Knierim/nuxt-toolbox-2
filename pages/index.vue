@@ -19,12 +19,24 @@
           >https://github.com/netlify-templates/nuxt-toolbox</a
         >! Happy coding!
       </p>
+      <p>
+        <button @click="serverlessTest()">Test</button>
+        {{serverlessResponse}}
+      </p>
     </div>
     <FeedbackForm />
     <JokeBlock />
   </main>
 </template>
+<script lang="ts" setup>
+import {ref} from "vue";
+const serverlessResponse = ref('');
 
+const serverlessTest = async () => {
+  const response = await fetch('/.netlify/functions/test').then(response => response.json());
+  serverlessResponse.value = response.message;
+}
+</script>
 <style>
 * {
   font-family: 'Helvetica', sans-serif;

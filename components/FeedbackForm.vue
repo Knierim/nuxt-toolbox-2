@@ -13,6 +13,8 @@
         </label>
       </p>
       <input type="hidden" name="form-name" value="feedback" />
+      <label for="salutation">Anrede</label>
+      <input id="salutation" type="text" name="salutation" />
       <label for="name">Name</label>
       <input id="name" type="text" name="name" />
       <label for="email">Email</label>

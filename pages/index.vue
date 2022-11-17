@@ -23,7 +23,12 @@
         <button @click="serverlessTest()">Test</button>
         {{serverlessResponse}}
       </p>
-      <p>
+      {{ user }}
+
+      <p v-if="user.id">
+        <button @click="logout()">Logout {{user.email}}</button>
+      </p>
+      <p v-else>
         <button @click="login()">Login</button>
       </p>
 
@@ -32,20 +37,37 @@
     <JokeBlock />
   </main>
 </template>
+<!-- no ts! -->
 <script setup>
 import netlifyIdentity from 'netlify-identity-widget'
-import {ref} from "vue";
+import {ref, onMounted} from "vue";
 const serverlessResponse = ref('');
 
 const serverlessTest = async () => {
   const response = await fetch('/.netlify/functions/test').then(response => response.json());
   serverlessResponse.value = response.message;
 }
+
+const user = ref({});
+
 const login = () => {
-  console.log('login');
-  netlifyIdentity.init({ locale: 'de'});
+  console.log('login function call');
   netlifyIdentity.open('login');
-}
+};
+
+onMounted(() => {
+  netlifyIdentity.init({ locale: 'de'});
+  netlifyIdentity.on('login', u => {
+    console.log('login event', u)
+    user.value = u;
+  });
+})
+
+const logout = () => {
+  console.log('logout');
+  netlifyIdentity.logout();
+  user.value = {};
+};
 
 </script>
 <style>

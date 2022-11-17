@@ -23,12 +23,17 @@
         <button @click="serverlessTest()">Test</button>
         {{serverlessResponse}}
       </p>
+      <p>
+        <button @click="login()">Login</button>
+      </p>
+
     </div>
     <FeedbackForm />
     <JokeBlock />
   </main>
 </template>
-<script lang="ts" setup>
+<script setup>
+import netlifyIdentity from 'netlify-identity-widget'
 import {ref} from "vue";
 const serverlessResponse = ref('');
 
@@ -36,6 +41,12 @@ const serverlessTest = async () => {
   const response = await fetch('/.netlify/functions/test').then(response => response.json());
   serverlessResponse.value = response.message;
 }
+const login = () => {
+  console.log('login');
+  netlifyIdentity.init({ locale: 'de'});
+  netlifyIdentity.open('login');
+}
+
 </script>
 <style>
 * {

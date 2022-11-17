@@ -51,7 +51,7 @@ const serverlessTest = async () => {
 const user = ref({});
 
 const login = () => {
-  console.log('login function call');
+  console.log('login function');
   netlifyIdentity.open('login');
 };
 
@@ -61,12 +61,15 @@ onMounted(() => {
     console.log('login event', u)
     user.value = u;
   });
+  netlifyIdentity.on('logout', u => {
+    console.log('logout event', u)
+    user.value = {};
+  });
 })
 
 const logout = () => {
-  console.log('logout');
+  console.log('logout function');
   netlifyIdentity.logout();
-  user.value = {};
 };
 
 </script>

@@ -23,8 +23,7 @@
         <button @click="serverlessTest()">Test</button>
         {{serverlessResponse}}
       </p>
-      {{ user }}
-
+      
       <p v-if="user.id">
         <button @click="logout()">Logout {{user.email}}</button>
       </p>
@@ -55,22 +54,24 @@ const login = () => {
   netlifyIdentity.open('login');
 };
 
+const logout = () => {
+  console.log('logout function');
+  netlifyIdentity.logout();
+};
+
 onMounted(() => {
   netlifyIdentity.init({ locale: 'de'});
+
   netlifyIdentity.on('login', u => {
     console.log('login event', u)
     user.value = u;
   });
+
   netlifyIdentity.on('logout', u => {
     console.log('logout event', u)
     user.value = {};
   });
 })
-
-const logout = () => {
-  console.log('logout function');
-  netlifyIdentity.logout();
-};
 
 </script>
 <style>

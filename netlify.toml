@@ -19,6 +19,10 @@
 [functions]
   node_bundler = "esbuild"
 
+[[edge_functions]]
+path = "/test"
+function = "test"
+
 [[plugins]]
   package = "netlify-plugin-cypress"
   [plugins.inputs]
